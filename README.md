@@ -54,6 +54,7 @@
   dma_addr(Process, baseAddr: int, offsets: array) -> int
   aob_scan(Process, pattern: string, module: Process["modules"]["moduleName"]) -> int
   nop_code(Process, address: int, length: int)
+  patch_bytes(Process, address: int, data: byte array)
   inject_dll(Process, dllPath: string)
   page_protection(Process, address: int, newProtection: int = 0x40) -> int (old protection)
 
