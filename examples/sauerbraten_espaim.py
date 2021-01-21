@@ -103,7 +103,6 @@ def main():
             head = e.fpos2d["y"] - e.hpos2d["y"]
             width = head / 2
             center = width / -2
-            font_x = e.hpos2d["x"] - len(e.name)
 
             alpha_box(
                 e.hpos2d["x"] + center,
@@ -116,21 +115,21 @@ def main():
             )
             font_print(
                 font,
-                font_x,
+                e.hpos2d["x"] - (len(e.name) * 2.5) ,
                 e.hpos2d["y"] + 10,
                 e.name,
                 rgb("white")
             )
             font_print(
                 font,
-                font_x,
+                e.hpos2d["x"] - 10,
                 e.fpos2d["y"] - 10,
                 f"{e.health} ({e.armor})",
                 rgb("green") if e.health > 50 else rgb("red")
             )
             font_print(
                 font,
-                font_x,
+                e.hpos2d["x"] - 10,
                 e.fpos2d["y"] - 23,
                 str(e.distance),
                 rgb("white")

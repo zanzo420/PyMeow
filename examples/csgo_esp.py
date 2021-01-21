@@ -2,11 +2,11 @@ from pymeow import *
 
 
 class Offsets:
-    dwEntityList = 0x4DA2E14
-    dwLocalPlayer = 0xD8B2BC
-    dwViewMatrix = 0x4D94714
-    dwGlowObjectManager = 0x52EB3F8
-    dwRadarBase = 0x51D7B8C
+    dwEntityList = 0x4DA0D54
+    dwLocalPlayer = 0xD892AC
+    dwViewMatrix = 0x4D92654
+    dwGlowObjectManager = 0x52E9348
+    dwRadarBase = 0x51D5ACC
 
     m_bDormant = 0xED
     m_iHealth = 0x100

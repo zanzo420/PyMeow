@@ -27,6 +27,7 @@ try:
     )
     game_context = read_int(mem, Offsets.ClientGameContext)
     player_manager = read_int(mem, game_context + Offsets.PlayerManager)
+    client_array = read_int(mem, player_manager + Offsets.ClientArray)
     overlay = overlay_init()
 except Exception as e:
     sys.exit(e)
@@ -78,7 +79,7 @@ class Entity:
             return
 
         try:
-            soldier = read_uint(mem, controlled + Offsets.SoldierPrediction)
+            soldier = read_int64(mem, controlled + Offsets.SoldierPrediction)
             self.pos3d = read_vec3(mem, soldier + Offsets.Position)
             self.headpos3d = vec3(
                 self.pos3d["x"], self.pos3d["y"] + self.height - 18.5, self.pos3d["z"]
@@ -92,10 +93,9 @@ class Entity:
 
 
 def ent_loop():
-    client_array = read_int(mem, player_manager + Offsets.ClientArray)
     if client_array:
-        for i in range(1, 64):
-            ent_addr = read_int(mem, client_array + 8 * i)
+        clients = read_ints(mem, client_array, 64 * 2)
+        for ent_addr in clients[1:]:
             if ent_addr:
                 e = Entity(ent_addr).read()
                 if e:
@@ -105,19 +105,20 @@ def ent_loop():
 def main():
     set_foreground("STAR WARS Battlefront II")
     while overlay_loop(overlay):
-        local_player = read_int(mem, player_manager + Offsets.LocalPlayer)
+        local_player = read_int64(mem, player_manager + Offsets.LocalPlayer)
         local_player = Entity(local_player).read()
 
         if local_player:
-            vm = read_floats(mem, render_view + Offsets.ViewProj, 16)
             for ent in ent_loop():
                 if ent.team == local_player.team:
                     continue
 
+                vm = read_floats(mem, render_view + Offsets.ViewProj, 16)
+
                 try:
                     ent.pos2d = wts(ent.pos3d, vm)
                     ent.headpos2d = wts(ent.headpos3d, vm)
-                except Exception:
+                except:
                     continue
 
                 head = ent.headpos2d["y"] - ent.pos2d["y"]
