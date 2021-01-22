@@ -63,12 +63,12 @@ class Entity:
     def read(self):
         self.team = read_int(mem, self.addr + Offsets.Team)
 
-        controlled = read_uint(mem, self.addr + Offsets.ControlledControllable)
+        controlled = read_int64(mem, self.addr + Offsets.ControlledControllable)
         if controlled < 0:
             return
 
         try:
-            health_comp = read_uint(mem, controlled + Offsets.HealthComponent)
+            health_comp = read_int64(mem, controlled + Offsets.HealthComponent)
         except:
             return
 
@@ -94,10 +94,14 @@ class Entity:
 
 def ent_loop():
     if client_array:
-        clients = read_ints(mem, client_array, 64 * 2)
-        for ent_addr in clients[1:]:
+        clients = read_ints64(mem, client_array, 64 * 2)
+        for ent_addr in clients:
             if ent_addr:
-                e = Entity(ent_addr).read()
+                try:
+                    e = Entity(ent_addr).read()
+                except:
+                    continue
+
                 if e:
                     yield e
 
@@ -110,7 +114,7 @@ def main():
 
         if local_player:
             for ent in ent_loop():
-                if ent.team == local_player.team:
+                if ent.team == local_player.team or ent.addr == local_player.addr:
                     continue
 
                 vm = read_floats(mem, render_view + Offsets.ViewProj, 16)
