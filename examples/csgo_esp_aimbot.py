@@ -1,25 +1,36 @@
-from pymeow import *
-
 """
 CSGo ESP + AimBot written with PyMeow
 X: Aim to closest Target
 END: Exit
 """
 
+import sys
+from pymeow import *
+from requests import get
+
+
+try:
+    # Credits to https://github.com/frk1/hazedumper
+    haze = get("https://raw.githubusercontent.com/frk1/hazedumper/master/csgo.json").json()
+    sigs = haze["signatures"]
+    netv = haze["netvars"]
+except:
+    sys.exit("Unable to fetch Hazedumper's Offsets")
+
 
 class Offsets:
-    dwEntityList = 0x4DA0D54
-    dwLocalPlayer = 0xD892AC
-    dwViewMatrix = 0x4D92654
-    dwGlowObjectManager = 0x52E9348
-    dwRadarBase = 0x51D5ACC
+    dwEntityList = sigs["dwEntityList"]
+    dwLocalPlayer = sigs["dwLocalPlayer"]
+    dwViewMatrix = sigs["dwViewMatrix"]
+    dwGlowObjectManager = sigs["dwGlowObjectManager"]
+    dwRadarBase = sigs["dwRadarBase"]
 
-    m_bDormant = 0xED
-    m_iHealth = 0x100
-    m_vecOrigin = 0x138
-    m_iTeamNum = 0xF4
-    m_iGlowIndex = 0xA438
-    m_dwBoneMatrix = 0x26A8
+    m_bDormant = sigs["m_bDormant"]
+    m_iHealth = netv["m_iHealth"]
+    m_vecOrigin = netv["m_vecOrigin"]
+    m_iTeamNum = netv["m_iTeamNum"]
+    m_iGlowIndex = netv["m_iGlowIndex"]
+    m_dwBoneMatrix = netv["m_dwBoneMatrix"]
 
 
 class Entity:
