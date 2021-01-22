@@ -189,3 +189,18 @@ proc triangle(x1, y1, x2, y2, x3, y3: float, color: array[0..2, float32], alpha:
   glVertex2f(x2, y2)
   glVertex2f(x3, y3)
   glEnd()
+
+proc value_bar(x1, y1, x2, y2, width, maxValue, value: float, vertical: bool = true) {.exportpy.} =
+  let
+    offset = 3.0
+    x = value / maxValue
+    barY = (y2 - y1) * (value / maxValue) + y1
+    barX = (x2 - x1) * (value / maxValue) + x1
+    color = [(2.0 * (1 - x)).float32, (2.0 * x).float32, 0.float32]
+
+  line(x1, y1, x2, y2, width + offset, [0.float32, 0, 0])
+
+  if vertical:
+    line(x1, y1 + offset, x2, barY - offset, width, color)
+  else:
+    line(x1 + offset, y1, barX - offset, y2, width, color)

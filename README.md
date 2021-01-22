@@ -16,6 +16,9 @@
 ## [Cube2: Sauberbraten ESP + Aimbot](https://github.com/Sann0/PyMeow/blob/master/examples/sauerbraten_espaim.py)
 [<img src="https://img.youtube.com/vi/7F_16FQURGc/maxresdefault.jpg" width="50%">](https://youtu.be/7F_16FQURGc)
 
+## [Healthbar](https://github.com/Sann0/PyMeow/blob/master/examples/healthbar.py)
+![Alt text](https://github.com/Sann0/PyMeow/blob/master/examples/screenshots/healthbar.gif)
+
 ## API:
 ```
 -- Memory:
@@ -77,6 +80,7 @@
   circle(x, y, radius: float, color: rgb array, filled: bool = true)
   rad_circle(x, y, radius: float, value: int, color: rgb array)
   triangle(x1, y1, x2, y2, x3, y3: float, color: rgb array, alpha: float)
+  value_bar(x1, y1, x2, y2, width, maxValue, value: float, vertical: bool = true)
 
 -- Vectors:
   vec2(x, y: float = 0) -> Vec2
