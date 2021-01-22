@@ -9,17 +9,17 @@ pyExportModule("pymeow")
 type
   Mod = object
     baseaddr: ByteAddress
-    basesize: DWORD
+    basesize: int32
 
   Process = object
     name: string
-    handle: HANDLE
-    pid: DWORD
+    handle: int
+    pid: int32
     baseaddr: ByteAddress
-    basesize: DWORD
+    basesize: int32
     modules: Table[string, Mod]
 
-proc pidInfo(pid: DWORD): Process =
+proc pidInfo(pid: int32): Process =
   var 
     snap = CreateToolhelp32Snapshot(TH32CS_SNAPMODULE or TH32CS_SNAPMODULE32, pid)
     me = MODULEENTRY32(dwSize: sizeof(MODULEENTRY32).cint)
@@ -49,14 +49,14 @@ proc pidInfo(pid: DWORD): Process =
 proc process_by_name(name: string): Process {.exportpy.} =
   var 
     pidArray = newSeq[int32](1024)
-    read: DWORD
+    read: int32
 
   assert EnumProcesses(pidArray[0].addr, 1024, read.addr) != FALSE
 
   for i in 0..<read div 4:
     var p = pidInfo(pidArray[i])
     if p.pid != 0 and name == p.name:
-      p.handle = OpenProcess(PROCESS_ALL_ACCESS, 0, p.pid).DWORD
+      p.handle = OpenProcess(PROCESS_ALL_ACCESS, 0, p.pid).int32
       if p.handle != 0:
         return p
       raise newException(Exception, fmt"Unable to open Process [Pid: {p.pid}] [Error code: {GetLastError()}]")
@@ -66,7 +66,7 @@ proc process_by_name(name: string): Process {.exportpy.} =
 iterator enumerate_processes: Process {.exportpy.} =
   var 
     pidArray = newSeq[int32](1024)
-    read: DWORD
+    read: int32
 
   assert EnumProcesses(pidArray[0].addr, 1024, read.addr) != FALSE
 
@@ -147,7 +147,7 @@ proc aob_scan(self: Process, pattern: string, module: Mod = Mod()): ByteAddress 
 
     if mbi.State != MEM_COMMIT or mbi.State == PAGE_NOACCESS: continue
 
-    var oldProt: DWORD
+    var oldProt: int32
     VirtualProtectEx(self.handle, cast[LPCVOID](curAddr), mbi.RegionSize, PAGE_EXECUTE_READWRITE, oldProt.addr)
     let byteString = cast[string](self.readSeq(cast[ByteAddress](mbi.BaseAddress), mbi.RegionSize)).toHex()
     VirtualProtectEx(self.handle, cast[LPCVOID](curAddr), mbi.RegionSize, oldProt, nil)
