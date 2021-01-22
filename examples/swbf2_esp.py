@@ -114,7 +114,7 @@ def main():
 
         if local_player:
             for ent in ent_loop():
-                if ent.team == local_player.team or ent.addr == local_player.addr:
+                if ent.team == local_player.team:
                     continue
 
                 vm = read_floats(mem, render_view + Offsets.ViewProj, 16)
