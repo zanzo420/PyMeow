@@ -108,16 +108,16 @@ mouse_move(overlay: Overlay, x, y: float)
 <img src="https://github.com/Sann0/PyMeow/blob/master/examples/screenshots/csgo_py.png" alt="alt text" width="650" height="450">
 
 ## [Assault Cube ESP](https://github.com/Sann0/PyMeow/blob/master/examples/ac_esp.py)
-![](https://github.com/Sann0/PyMeow/blob/master/examples/screenshots/ac2_py.png)
+<img src="https://github.com/Sann0/PyMeow/blob/master/examples/screenshots/ac2_py.png" alt="alt text" width="650" height="450">
 
 ## [Assault Cube Mem Hacks](https://github.com/Sann0/PyMeow/blob/master/examples/ac_hacks.py):
-![](https://github.com/Sann0/PyMeow/blob/master/examples/screenshots/ac_py.png)
+<img src="https://github.com/Sann0/PyMeow/blob/master/examples/screenshots/ac_py.png" alt="alt text" width="650" height="450">
 
 ## [SWBF2 ESP](https://github.com/Sann0/PyMeow/blob/master/examples/swbf2_esp.py)
-![](https://github.com/Sann0/PyMeow/blob/master/examples/screenshots/swbf_py.png)
+<img src="https://github.com/Sann0/PyMeow/blob/master/examples/screenshots/swbf_py.png" alt="alt text" width="650" height="450">
 
 ## [Cube2: Sauberbraten ESP + Aimbot](https://github.com/Sann0/PyMeow/blob/master/examples/sauerbraten_espaim.py)
-[<img src="https://img.youtube.com/vi/7F_16FQURGc/maxresdefault.jpg" width="100%">](https://youtu.be/7F_16FQURGc)
+[<img src="https://img.youtube.com/vi/7F_16FQURGc/maxresdefault.jpg" width="650" height="450">](https://youtu.be/7F_16FQURGc)
 
 ## [Healthbar](https://github.com/Sann0/PyMeow/blob/master/examples/healthbar.py)
 ![](https://github.com/Sann0/PyMeow/blob/master/examples/screenshots/healthbar.gif)
