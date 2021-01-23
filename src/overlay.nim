@@ -194,8 +194,8 @@ proc value_bar(x1, y1, x2, y2, width, maxValue, value: float, vertical: bool = t
   let
     offset = 3.0
     x = value / maxValue
-    barY = (y2 - y1) * (value / maxValue) + y1
-    barX = (x2 - x1) * (value / maxValue) + x1
+    barY = (y2 - y1) * x + y1
+    barX = (x2 - x1) * x + x1
     color = [(2.0 * (1 - x)).float32, (2.0 * x).float32, 0.float32]
 
   line(x1, y1, x2, y2, width + offset, [0.float32, 0, 0])
