@@ -111,15 +111,15 @@ mouse_move(overlay: Overlay, x, y: float)
 ![](https://github.com/Sann0/PyMeow/blob/master/examples/screenshots/ac2_py.png)
 
 ## [Assault Cube Mem Hacks](https://github.com/Sann0/PyMeow/blob/master/examples/ac_hacks.py):
-![Alt text](https://github.com/Sann0/PyMeow/blob/master/examples/screenshots/ac_py.png)
+![](https://github.com/Sann0/PyMeow/blob/master/examples/screenshots/ac_py.png)
 
 ## [SWBF2 ESP](https://github.com/Sann0/PyMeow/blob/master/examples/swbf2_esp.py)
-![Alt text](https://github.com/Sann0/PyMeow/blob/master/examples/screenshots/swbf_py.png)
+![](https://github.com/Sann0/PyMeow/blob/master/examples/screenshots/swbf_py.png)
 
 ## [Cube2: Sauberbraten ESP + Aimbot](https://github.com/Sann0/PyMeow/blob/master/examples/sauerbraten_espaim.py)
-[<img src="https://img.youtube.com/vi/7F_16FQURGc/maxresdefault.jpg" width="50%">](https://youtu.be/7F_16FQURGc)
+[<img src="https://img.youtube.com/vi/7F_16FQURGc/maxresdefault.jpg" width="100%">](https://youtu.be/7F_16FQURGc)
 
 ## [Healthbar](https://github.com/Sann0/PyMeow/blob/master/examples/healthbar.py)
-![Alt text](https://github.com/Sann0/PyMeow/blob/master/examples/screenshots/healthbar.gif)
+![](https://github.com/Sann0/PyMeow/blob/master/examples/screenshots/healthbar.gif)
 
 ###### credits to: [nimpy](https://github.com/yglukhov/nimpy), [winim](https://github.com/khchen/winim), [nimgl](https://github.com/nimgl/nimgl), [GuidedHacking](https://guidedhacking.com)
