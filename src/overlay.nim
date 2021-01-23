@@ -12,7 +12,7 @@ type
 
   Font = object
     font: uint32
-    fontHDC: HDC
+    fontHDC: int
 
 var OverlayWindow: GLFWWindow
 
