@@ -210,8 +210,8 @@ proc write_int16(self: Process, address: ByteAddress, data: int16) {.exportpy.} 
 proc write_ints16(self: Process, address: ByteAddress, data: openArray[int16]) {.exportpy.} = write_datas
 proc write_int64(self: Process, address: ByteAddress, data: int64) {.exportpy.} = write_data
 proc write_ints64(self: Process, address: ByteAddress, data: openArray[int64]) {.exportpy.} = write_datas
-proc write_float(self: Process, address: ByteAddress, data: cfloat) {.exportpy.} = write_data
-proc write_floats(self: Process, address: ByteAddress, data: openArray[cfloat]) {.exportpy.} = write_datas
+proc write_float(self: Process, address: ByteAddress, data: float32) {.exportpy.} = write_data
+proc write_floats(self: Process, address: ByteAddress, data: openArray[float32]) {.exportpy.} = write_datas
 proc write_byte(self: Process, address: ByteAddress, data: byte) {.exportpy.} = write_data
 proc write_bytes(self: Process, address: ByteAddress, data: openArray[byte]) {.exportpy.} = write_datas
 proc write_vec2(self: Process, address: ByteAddress, data: Vec2) {.exportpy.} = write_data
