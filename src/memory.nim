@@ -204,8 +204,12 @@ proc read_bool(self: Process, address: ByteAddress): bool {.exportpy.} = self.re
 
 template write_data = self.write(address, data)
 template write_datas = self.writeArray(address, data)
-proc write_int(self: Process, address: ByteAddress, data: cint) {.exportpy.} = write_data
-proc write_ints(self: Process, address: ByteAddress, data: openArray[cint]) {.exportpy.} = write_datas
+proc write_int(self: Process, address: ByteAddress, data: int32) {.exportpy.} = write_data
+proc write_ints(self: Process, address: ByteAddress, data: openArray[int32]) {.exportpy.} = write_datas
+proc write_int16(self: Process, address: ByteAddress, data: int16) {.exportpy.} = write_data
+proc write_ints16(self: Process, address: ByteAddress, data: openArray[int16]) {.exportpy.} = write_datas
+proc write_int64(self: Process, address: ByteAddress, data: int64) {.exportpy.} = write_data
+proc write_ints64(self: Process, address: ByteAddress, data: openArray[int64]) {.exportpy.} = write_datas
 proc write_float(self: Process, address: ByteAddress, data: cfloat) {.exportpy.} = write_data
 proc write_floats(self: Process, address: ByteAddress, data: openArray[cfloat]) {.exportpy.} = write_datas
 proc write_byte(self: Process, address: ByteAddress, data: byte) {.exportpy.} = write_data
