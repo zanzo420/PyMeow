@@ -105,7 +105,7 @@ mouse_move(overlay: Overlay, x, y: float)
 ```
 
 ## [CSGo ESP](https://github.com/Sann0/PyMeow/blob/master/examples/csgo_esp.py):
-![](https://github.com/Sann0/PyMeow/blob/master/examples/screenshots/csgo_py.png =250x)
+![Alt text](https://github.com/Sann0/PyMeow/blob/master/examples/screenshots/csgo_py.png =250x)
 
 ## [Assault Cube ESP](https://github.com/Sann0/PyMeow/blob/master/examples/ac_esp.py)
 ![Alt text](https://github.com/Sann0/PyMeow/blob/master/examples/screenshots/ac2_py.png)
