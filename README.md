@@ -32,6 +32,8 @@
   read_ints(Process, address: int, size: int) -> int array
   read_uint(Process, address: int) -> int
   read_uints(Process, address: int, size: int) -> int array
+  read_int16(Process, address: int) -> int16
+  read_ints16(Process, address: int) -> int16 array
   read_int64(Process, address: int) -> int64
   read_ints64(Process, address: int, size: int) -> int64 array
   read_float(Process, address: int) -> float
@@ -46,6 +48,10 @@
 
   write_int(Process, address: int, data: int)
   write_ints(Process, address: int, data: int array)
+  write_int16(Process, address: int, data: int)
+  write_ints16(Process, address: int, data: int array)
+  write_int64(Process, address: int, data: int)
+  write_ints64(Process, address: int, data: int array)
   write_float(Process, address: int, data: float)
   write_floats(Process, address: int, data: float array)
   write_byte(Process, address: int, data: byte)
