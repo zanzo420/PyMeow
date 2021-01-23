@@ -2,7 +2,7 @@
 #### Python Library for external Game Hacking created with [Nim](https://nim-lang.org)
 
 ##### <ins>Installation / Usage</ins>
-- Install Python 3 **64bit**
+- Make sure you use a **64bit** version of Python 3
 - Download the latest PyMeow Module from the ![Release Section](https://github.com/Sann0/PyMeow/releases)
 - Import the Module in your Python Script
 
