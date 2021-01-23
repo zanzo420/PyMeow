@@ -4,7 +4,7 @@
 ##### <ins>Installation / Usage</ins>
 - Install Python 3 **64bit**
 - Download the latest PyMeow Module from the ![Release Section](https://github.com/Sann0/PyMeow/releases)
-- Import the Module in your Python Script and use it
+- Import the Module in your Python Script
 
 ##### <ins>Memory API</ins>
 ```
