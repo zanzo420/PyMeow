@@ -84,7 +84,7 @@ def main():
         local_ent = Entity(local_player_addr, csgo_proc, game_module)
 
         if local_player_addr:
-            ent_addrs = read_ints(csgo_proc, game_module + Offsets.dwEntityList, 255)[0::4]
+            ent_addrs = read_ints(csgo_proc, game_module + Offsets.dwEntityList, 32 * 2)[0::4]
             view_matrix = read_floats(csgo_proc, game_module + Offsets.dwViewMatrix, 16)
             for ent_addr in ent_addrs:
                 if ent_addr > 0 and ent_addr != local_player_addr:
