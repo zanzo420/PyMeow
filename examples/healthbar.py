@@ -28,7 +28,7 @@ def main():
                 bar_width,
                 maxHealth,
                 health,
-                False
+                vertical=False
             )
             
             sleep(0.01)
