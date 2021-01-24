@@ -89,40 +89,11 @@ def main():
                         try:
                             ent.wts = wts_dx(overlay, view_matrix, ent.pos)
                             ent.glow()
-                            font_print(
-                                font,
-                                ent.wts["x"] + 20,
-                                ent.wts["y"] + 30,
-                                ent.name,
-                                rgb("white"),
-                            )
-                            font_print(
-                                font,
-                                ent.wts["x"] + 20,
-                                ent.wts["y"] + 20,
-                                str(ent.health),
-                                rgb("white"),
-                            )
-                            font_print(
-                                font,
-                                ent.wts["x"] + 20,
-                                ent.wts["y"] + 10,
-                                str(int(vec3_distance(ent.pos, local_ent.pos) / 20)),
-                                rgb("white"),
-                            )
-                            dashed_line(
-                                overlay["midX"],
-                                0,
-                                ent.wts["x"],
-                                ent.wts["y"],
-                                1,
-                                rgb("white"),
-                            )
-
                             head_pos = wts_dx(overlay, view_matrix, ent.bone_pos(8))
                             head = head_pos["y"] - ent.wts["y"]
                             width = head / 2
                             center = width / -2
+
                             alpha_box(
                                 ent.wts["x"] + center,
                                 ent.wts["y"],
@@ -132,8 +103,37 @@ def main():
                                 rgb("black"),
                                 0.15,
                             )
-                        except Exception as e:
-                            # WTS failed.
+                            value_bar(
+                                ent.wts["x"] + center,
+                                ent.wts["y"],
+                                ent.wts["x"] + center,
+                                head_pos["y"] + 5,
+                                2,
+                                100, ent.health
+                            )
+                            font_print(
+                                font,
+                                ent.wts["x"] - len(ent.name) * 1.5,
+                                ent.wts["y"] - 10,
+                                ent.name,
+                                rgb("white"),
+                            )
+                            font_print(
+                                font,
+                                ent.wts["x"] - 2,
+                                ent.wts["y"] - 20,
+                                str(int(vec3_distance(ent.pos, local_ent.pos) / 20)),
+                                rgb("white"),
+                            )
+                            dashed_line(
+                                overlay["midX"],
+                                overlay["midY"],
+                                ent.wts["x"],
+                                ent.wts["y"],
+                                1,
+                                rgb("silver"),
+                            )
+                        except:
                             pass
 
         overlay_update(overlay)
