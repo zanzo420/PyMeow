@@ -12,6 +12,16 @@ except:
     sys.exit("Unable to fetch Hazedumper's Offsets")
 
 
+class Colors:
+    white = rgb("white")
+    black = rgb("black")
+    blue = rgb("blue")
+    red = rgb("red")
+    cyan = rgb("cyan")
+    orange = rgb("orange")
+    silver = rgb("silver")
+
+
 class Offsets:
     dwEntityList = sigs["dwEntityList"]
     dwLocalPlayer = sigs["dwLocalPlayer"]
@@ -39,10 +49,7 @@ class Entity:
         self.dormant = read_int(self.mem, self.addr + Offsets.m_bDormant)
         self.team = read_int(self.mem, self.addr + Offsets.m_iTeamNum)
         self.bone_base = read_int(self.mem, self.addr + Offsets.m_dwBoneMatrix)
-
-    @property
-    def pos(self):
-        return read_vec3(self.mem, self.addr + Offsets.m_vecOrigin)
+        self.pos = read_vec3(self.mem, self.addr + Offsets.m_vecOrigin)
 
     @property
     def name(self):
@@ -58,22 +65,26 @@ class Entity:
         )
 
     def glow(self):
+        """
+        Should be used in a thread.
+        """
         glow_addr = (
             read_int(self.mem, self.gmod + Offsets.dwGlowObjectManager)
             + read_int(self.mem, self.addr + Offsets.m_iGlowIndex) * 0x38
         )
 
-        color = rgb("cyan") if self.team != 2 else rgb("orange")
-        write_floats(self.mem, glow_addr + 4, color + [1.3])
+        color = Colors.cyan if self.team != 2 else Colors.orange
+        write_floats(self.mem, glow_addr + 4, color + [1.5])
         write_bytes(self.mem, glow_addr + 0x24, [1, 0])
 
 
 def main():
+    title = "Counter-Strike: Global Offensive"
     csgo_proc = process_by_name("csgo.exe")
     game_module = csgo_proc["modules"]["client.dll"]["baseaddr"]
-    overlay = overlay_init()
+    overlay = overlay_init() # Windowed Fullscreen
     font = font_init(10, "Tahoma")
-    set_foreground("Counter-Strike: Global Offensive")
+    set_foreground(title)
 
     while overlay_loop(overlay):
         overlay_update(overlay)
@@ -103,8 +114,8 @@ def main():
                                 ent.wts["y"],
                                 width,
                                 head + 5,
-                                rgb("blue") if ent.team != 2 else rgb("red"),
-                                rgb("black"),
+                                Colors.cyan if ent.team != 2 else Colors.red,
+                                Colors.black,
                                 0.15,
                             )
                             value_bar(
@@ -120,14 +131,14 @@ def main():
                                 ent.wts["x"] - len(ent.name) * 1.5,
                                 ent.wts["y"] - 10,
                                 ent.name,
-                                rgb("white"),
+                                Colors.white,
                             )
                             font_print(
                                 font,
                                 ent.wts["x"] - 2,
                                 ent.wts["y"] - 20,
                                 str(int(vec3_distance(ent.pos, local_ent.pos) / 20)),
-                                rgb("white"),
+                                Colors.white,
                             )
                             dashed_line(
                                 overlay["midX"],
@@ -135,9 +146,10 @@ def main():
                                 ent.wts["x"],
                                 ent.wts["y"],
                                 1,
-                                rgb("silver"),
+                                Colors.silver,
                             )
-                        except:
+                        except Exception as e:
+                            print(e)
                             pass
     
     overlay_deinit(overlay)
