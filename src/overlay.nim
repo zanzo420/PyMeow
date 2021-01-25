@@ -191,6 +191,9 @@ proc triangle(x1, y1, x2, y2, x3, y3: float, color: array[0..2, float32], alpha:
   glEnd()
 
 proc value_bar(x1, y1, x2, y2, width, maxValue, value: float, vertical: bool = true) {.exportpy.} =
+  if value > maxValue:
+    raise newException(Exception, "ValueBar: Max Value > value")
+
   let
     x = value / maxValue
     barY = (y2 - y1) * x + y1
