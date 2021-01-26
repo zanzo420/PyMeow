@@ -74,12 +74,11 @@ def main():
     except:
         sys.exit("Unable to fetch Hazedumper's Offsets")
 
-    title = "Counter-Strike: Global Offensive"
     csgo_proc = process_by_name("csgo.exe")
     game_module = csgo_proc["modules"]["client.dll"]["baseaddr"]
     overlay = overlay_init() # Windowed Fullscreen
     font = font_init(10, "Tahoma")
-    set_foreground(title)
+    set_foreground("Counter-Strike: Global Offensive")
 
     while overlay_loop(overlay):
         overlay_update(overlay)
