@@ -176,6 +176,7 @@ proc inject_dll(self: Process, dllPath: string) {.exportpy.} =
   if CreateRemoteThread(self.handle, nil, 0, cast[LPTHREAD_START_ROUTINE](LoadLibraryA), vPtr, 0, nil) == 0:
     raise newException(Exception, fmt"Injection failed [Error: {GetLastError()}]")
 
+
 proc page_protection(self: Process, address: ByteAddress, newProtection: int32 = 0x40): int32 {.exportpy.} =
   var mbi = MEMORY_BASIC_INFORMATION()
   discard VirtualQueryEx(self.handle, cast[LPCVOID](address), mbi.addr, cast[SIZE_T](sizeof(mbi)))
