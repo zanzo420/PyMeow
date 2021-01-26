@@ -49,8 +49,8 @@ proc wts_ogl(self: Overlay, matrix: array[0..15, float32], pos: Vec3): Vec2 {.ex
   # z = w
   clip.z = pos.x * matrix[3] + pos.y * matrix[7] + pos.z * matrix[11] + matrix[15]
 
-  if clip.z < 0.1:
-    raise newException(Exception, "WTS")
+  if clip.z < 0.2:
+    return
 
   ndc.x = clip.x / clip.z
   ndc.y = clip.y / clip.z
@@ -68,8 +68,8 @@ proc wts_dx(self: Overlay, matrix: array[0..15, float32], pos: Vec3): Vec2 {.exp
   # z = w
   clip.z = pos.x * matrix[12] + pos.y * matrix[13] + pos.z * matrix[14] + matrix[15]
 
-  if clip.z < 0.1:
-    raise newException(Exception, "WTS")
+  if clip.z < 0.2:
+    return
 
   ndc.x = clip.x / clip.z
   ndc.y = clip.y / clip.z
