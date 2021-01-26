@@ -29,6 +29,7 @@ class Offsets:
     dwGlowObjectManager = sigs["dwGlowObjectManager"]
     dwRadarBase = sigs["dwRadarBase"]
 
+    m_iCrosshairId = netv["m_iCrosshairId"]
     m_bDormant = sigs["m_bDormant"]
     m_iHealth = netv["m_iHealth"]
     m_vecOrigin = netv["m_vecOrigin"]
@@ -78,6 +79,12 @@ class Entity:
         write_bytes(self.mem, glow_addr + 0x24, [1, 0])
 
 
+def trigger_bot(mem, local, ent):
+    cross = read_int(mem, local.addr + Offsets.m_iCrosshairId)
+    if cross == ent.id and ent.team != local.team:
+        mouse_click()
+
+
 def main():
     title = "Counter-Strike: Global Offensive"
     csgo_proc = process_by_name("csgo.exe")
@@ -103,7 +110,7 @@ def main():
                     if not ent.dormant and ent.health > 0:
                         try:
                             ent.wts = wts_dx(overlay, view_matrix, ent.pos)
-                            ent.glow()
+                            #ent.glow()
                             head_pos = wts_dx(overlay, view_matrix, ent.bone_pos(8))
                             head = head_pos["y"] - ent.wts["y"]
                             width = head / 2
@@ -148,8 +155,8 @@ def main():
                                 1,
                                 Colors.silver,
                             )
-                        except Exception as e:
-                            print(e)
+                            trigger_bot(csgo_proc, local_ent, ent)
+                        except:
                             pass
     
     overlay_deinit(overlay)
