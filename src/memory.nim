@@ -19,7 +19,6 @@ type
     basesize: int
     modules: Table[string, Mod]
 
-
 proc pidInfo(pid: int32): Process =
   var 
     snap = CreateToolhelp32Snapshot(TH32CS_SNAPMODULE or TH32CS_SNAPMODULE32, pid)
