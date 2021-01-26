@@ -9,14 +9,14 @@ pyExportModule("pymeow")
 type
   Mod = object
     baseaddr: ByteAddress
-    basesize: int32
+    basesize: int
 
   Process = object
     name: string
     handle: int
     pid: int32
     baseaddr: ByteAddress
-    basesize: int32
+    basesize: int
     modules: Table[string, Mod]
 
 proc pidInfo(pid: int32): Process =
