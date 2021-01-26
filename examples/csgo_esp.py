@@ -3,13 +3,8 @@ from pymeow import *
 from requests import get
 
 
-try:
-    # Credits to https://github.com/frk1/hazedumper
-    haze = get("https://raw.githubusercontent.com/frk1/hazedumper/master/csgo.json").json()
-    sigs = haze["signatures"]
-    netv = haze["netvars"]
-except:
-    sys.exit("Unable to fetch Hazedumper's Offsets")
+class Offsets:
+    pass
 
 
 class Colors:
@@ -20,22 +15,6 @@ class Colors:
     cyan = rgb("cyan")
     orange = rgb("orange")
     silver = rgb("silver")
-
-
-class Offsets:
-    dwEntityList = sigs["dwEntityList"]
-    dwLocalPlayer = sigs["dwLocalPlayer"]
-    dwViewMatrix = sigs["dwViewMatrix"]
-    dwGlowObjectManager = sigs["dwGlowObjectManager"]
-    dwRadarBase = sigs["dwRadarBase"]
-
-    m_iCrosshairId = netv["m_iCrosshairId"]
-    m_bDormant = sigs["m_bDormant"]
-    m_iHealth = netv["m_iHealth"]
-    m_vecOrigin = netv["m_vecOrigin"]
-    m_iTeamNum = netv["m_iTeamNum"]
-    m_iGlowIndex = netv["m_iGlowIndex"]
-    m_dwBoneMatrix = netv["m_dwBoneMatrix"]
 
 
 class Entity:
@@ -86,6 +65,15 @@ def trigger_bot(mem, local, ent):
 
 
 def main():
+    try:
+        # Credits to https://github.com/frk1/hazedumper
+        haze = get("https://raw.githubusercontent.com/frk1/hazedumper/master/csgo.json").json()
+
+        [setattr(Offsets, k, v) for k, v in haze["signatures"].items()]
+        [setattr(Offsets, k, v) for k, v in haze["netvars"].items()]
+    except:
+        sys.exit("Unable to fetch Hazedumper's Offsets")
+
     title = "Counter-Strike: Global Offensive"
     csgo_proc = process_by_name("csgo.exe")
     game_module = csgo_proc["modules"]["client.dll"]["baseaddr"]
@@ -110,7 +98,7 @@ def main():
                     if not ent.dormant and ent.health > 0:
                         try:
                             ent.wts = wts_dx(overlay, view_matrix, ent.pos)
-                            #ent.glow()
+                            # ent.glow()
                             head_pos = wts_dx(overlay, view_matrix, ent.bone_pos(8))
                             head = head_pos["y"] - ent.wts["y"]
                             width = head / 2
