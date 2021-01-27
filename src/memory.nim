@@ -7,7 +7,7 @@ from strformat import fmt
 pyExportModule("pymeow")
 
 type
-  Mod = object
+  Module = object
     baseaddr: ByteAddress
     basesize: int
 
@@ -17,7 +17,7 @@ type
     pid: int32
     baseaddr: ByteAddress
     basesize: int
-    modules: Table[string, Mod]
+    modules: Table[string, Module]
 
 proc pidInfo(pid: int32): Process =
   var 
@@ -34,13 +34,13 @@ proc pidInfo(pid: int32): Process =
       basesize: me.modBaseSize,
     )
 
-    result.modules[result.name] = Mod(
+    result.modules[result.name] = Module(
       baseaddr: result.baseaddr,
       basesize: result.basesize,
     )
 
     while Module32Next(snap, me.addr) != 0:
-      var m = Mod(
+      var m = Module(
         baseaddr: cast[ByteAddress](me.modBaseAddr),
         basesize: me.modBaseSize,
       )
@@ -121,7 +121,7 @@ proc readSeq(self: Process, address: ByteAddress, size: SIZE_T,  t: typedesc = b
   ) == 0:
     memoryErr("readSeq", address)
 
-proc aob_scan(self: Process, pattern: string, module: Mod = Mod()): ByteAddress {.exportpy.} =
+proc aob_scan(self: Process, pattern: string, module: Module = Module()): ByteAddress {.exportpy.} =
   var 
     scanBegin, scanEnd: int
     rePattern = re(
