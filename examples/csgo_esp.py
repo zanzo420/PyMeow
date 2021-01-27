@@ -107,7 +107,7 @@ def main():
                             width = head / 2
                             center = width / -2
 
-                            alpha_box(
+                            corner_box(
                                 ent.wts["x"] + center,
                                 ent.wts["y"],
                                 width,
@@ -117,9 +117,9 @@ def main():
                                 0.15,
                             )
                             value_bar(
-                                ent.wts["x"] + center,
+                                ent.wts["x"] + center - 5,
                                 ent.wts["y"],
-                                ent.wts["x"] + center,
+                                ent.wts["x"] + center - 5,
                                 head_pos["y"] + 5,
                                 2,
                                 100, ent.health

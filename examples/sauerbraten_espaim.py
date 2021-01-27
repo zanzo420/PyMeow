@@ -104,7 +104,7 @@ def main():
             width = head / 2
             center = width / -2
 
-            alpha_box(
+            corner_box(
                 e.hpos2d["x"] + center,
                 e.hpos2d["y"],
                 width,

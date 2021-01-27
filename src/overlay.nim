@@ -139,6 +139,37 @@ proc alpha_box(x, y, width, height: float, color, outlineColor: array[0..2, floa
   glVertex2f(x, y + height)
   glEnd()
 
+proc corner_box(x, y, width, height: float, color, outlineColor: array[0..2, float32], lineWidth: float = 1) {.exportpy.} =
+  template drawCorner =
+    glBegin(GL_LINES)
+    glVertex2f(x, y); glVertex2f(x + lineW, y)
+    glVertex2f(x, y); glVertex2f(x, y + lineH)
+
+    # Down Right
+    glVertex2f(x + width, y); glVertex2f(x + width, y + lineH)
+    glVertex2f(x + width, y); glVertex2f(x + width - lineW, y)
+
+    # Upper Left
+    glVertex2f(x, y + height); glVertex2f(x, y + height - lineH)
+    glVertex2f(x, y + height); glVertex2f(x + lineW, y + height)
+
+    # Upper Right
+    glVertex2f(x + width, y + height); glVertex2f(x + width, y + height - lineH)
+    glVertex2f(x + width, y + height); glvertex2f(x + width - lineW, y + height)
+    glEnd()
+
+  let
+    lineW = width / 4
+    lineH = height / 3
+
+  glLineWidth(lineWidth + 2)
+  glColor3f(outlineColor[0], outlineColor[1], outlineColor[2])
+  drawCorner()
+  glLineWidth(lineWidth)
+  glColor3f(color[0], color[1], color[2])
+  drawCorner()
+
+
 proc line(x1, y1, x2, y2, lineWidth: float, color: array[0..2, float32]) {.exportpy.} =
   glLineWidth(lineWidth)
   glBegin(GL_LINES)
