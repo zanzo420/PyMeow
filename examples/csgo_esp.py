@@ -85,8 +85,12 @@ def main():
         if key_pressed(35):
             overlay_close(overlay)
 
-        local_player_addr = read_int(csgo_proc, game_module + Offsets.dwLocalPlayer)
-        local_ent = Entity(local_player_addr, csgo_proc, game_module)
+        try:
+            local_player_addr = read_int(csgo_proc, game_module + Offsets.dwLocalPlayer)
+            local_ent = Entity(local_player_addr, csgo_proc, game_module)
+        except:
+            # No local player
+            continue
 
         if local_player_addr:
             ent_addrs = read_ints(csgo_proc, game_module + Offsets.dwEntityList, 128)[0::4]
