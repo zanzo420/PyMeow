@@ -111,7 +111,7 @@ mouse_move(overlay: Overlay, x, y: float)
 ```
 
 ## [CSGo ESP](https://github.com/Sann0/PyMeow/blob/master/examples/csgo_esp.py):
-<img src="https://guidedhacking.com/attachments/corners-png.13208/" alt="alt text" width="650" height="450">
+<img src="https://github.com/Sann0/PyMeow/blob/master/examples/screenshots/csgo_py.png" alt="alt text" width="650" height="450">
 
 ## [Assault Cube ESP](https://github.com/Sann0/PyMeow/blob/master/examples/ac_esp.py)
 <img src="https://github.com/Sann0/PyMeow/blob/master/examples/screenshots/ac2_py.png" alt="alt text" width="650" height="450">
