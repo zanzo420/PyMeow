@@ -93,11 +93,7 @@ def main():
             view_matrix = read_floats(csgo_proc, game_module + Offsets.dwViewMatrix, 16)
             for ent_addr in ent_addrs:
                 if ent_addr > 0 and ent_addr != local_player_addr:
-                    try:
-                        ent = Entity(ent_addr, csgo_proc, game_module)
-                    except:
-                        continue
-                    
+                    ent = Entity(ent_addr, csgo_proc, game_module)
                     if not ent.dormant and ent.health > 0:
                         try:
                             ent.wts = wts_dx(overlay, view_matrix, ent.pos)
