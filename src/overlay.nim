@@ -142,10 +142,11 @@ proc alpha_box(x, y, width, height: float, color, outlineColor: array[0..2, floa
 proc corner_box(x, y, width, height: float, color, outlineColor: array[0..2, float32], lineWidth: float = 1) {.exportpy.} =
   template drawCorner =
     glBegin(GL_LINES)
+    # Lower Left
     glVertex2f(x, y); glVertex2f(x + lineW, y)
     glVertex2f(x, y); glVertex2f(x, y + lineH)
 
-    # Down Right
+    # Lower Right
     glVertex2f(x + width, y); glVertex2f(x + width, y + lineH)
     glVertex2f(x + width, y); glVertex2f(x + width - lineW, y)
 
