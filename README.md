@@ -75,6 +75,7 @@ circle(x, y, radius: float, color: rgb array, filled: bool = true)
 rad_circle(x, y, radius: float, value: int, color: rgb array)
 triangle(x1, y1, x2, y2, x3, y3: float, color: rgb array, alpha: float)
 value_bar(x1, y1, x2, y2, width, maxValue, value: float, vertical: bool = true)
+corner_box(x, y, width, height: float, color, outlineColor: rgb array, lineWidth: float = 1)
 ```
 ##### <ins>Vector API</ins>
 ```
