@@ -30,7 +30,15 @@ def main():
                 health,
                 vertical=False
             )
-            
+
+            corner_box(
+                x + 7,
+                y,
+                bar_length - 7,
+                bar_length,
+                rgb("white"), rgb("black")
+            )
+
             sleep(0.01)
             overlay_update(overlay)
 
