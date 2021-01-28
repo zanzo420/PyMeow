@@ -113,6 +113,14 @@ def main():
                 rgb("black"),
                 0.15,
             )
+            value_bar(
+                e.fpos2d["x"] - center - 5,
+                e.fpos2d["y"] + 5,
+                e.fpos2d["x"] - center - 5,
+                e.hpos2d["y"],
+                2,
+                150, e.health
+            )
             font_print(
                 font,
                 e.hpos2d["x"] - (len(e.name) * 2.5) ,
@@ -122,25 +130,18 @@ def main():
             )
             font_print(
                 font,
-                e.hpos2d["x"] - 10,
+                e.fpos2d["x"] - 8,
                 e.fpos2d["y"] - 10,
-                f"{e.health} ({e.armor})",
-                rgb("green") if e.health > 50 else rgb("red")
-            )
-            font_print(
-                font,
-                e.hpos2d["x"] - 10,
-                e.fpos2d["y"] - 23,
                 str(e.distance),
                 rgb("white")
             )
             dashed_line(
                 overlay["midX"],
-                0,
-                e.fpos2d["x"],
-                e.fpos2d["y"],
+                overlay["height"],
+                e.hpos2d["x"],
+                e.hpos2d["y"],
                 1,
-                rgb("orange"),
+                rgb("silver"),
             )
 
         if key_pressed(88) and ent_vecs:
