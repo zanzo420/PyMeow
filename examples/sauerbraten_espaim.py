@@ -101,7 +101,7 @@ def main():
         for e in get_ents():
             ent_vecs.append(e.hpos3d)
             head = e.fpos2d["y"] - e.hpos2d["y"]
-            width = head / 2
+            width = head / 1.7
             center = width / -2
 
             corner_box(
