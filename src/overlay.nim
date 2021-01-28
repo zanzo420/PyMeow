@@ -156,7 +156,7 @@ proc corner_box(x, y, width, height: float, color, outlineColor: array[0..2, flo
 
     # Upper Right
     glVertex2f(x + width, y + height); glVertex2f(x + width, y + height - lineH)
-    glVertex2f(x + width, y + height); glvertex2f(x + width - lineW, y + height)
+    glVertex2f(x + width, y + height); glVertex2f(x + width - lineW, y + height)
     glEnd()
 
   let
