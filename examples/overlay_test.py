@@ -6,7 +6,7 @@ from time import time
 
 def main():
     overlay = pm.overlay_init()
-    font = pm.font_init(20, "Arial")
+    font = pm.font_init(20, "Impact")
     radius = 50
     r, g, b = 0.0, 0.3, 0.6
     x, y = overlay["midX"], overlay["midY"]
