@@ -23,8 +23,8 @@ def main():
 
             # Horizontal Healthbar
             value_bar(
-                x, y - 20,
-                x + bar_length, y - 20,
+                x, y - 12,
+                x + bar_length, y - 12,
                 bar_width,
                 maxHealth,
                 health,
