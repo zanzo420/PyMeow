@@ -6,6 +6,8 @@
 - Download the latest PyMeow Module from the ![Release Section](https://github.com/Sann0/PyMeow/releases)
 - Import the Module in your Python Script
 
+### ![Examples](https://github.com/Sann0/PyMeow#assault-cube-esp)
+
 ##### <ins>Memory API</ins>
 ```
 process_by_name(name: string) -> Process
