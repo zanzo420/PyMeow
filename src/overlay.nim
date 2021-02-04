@@ -13,6 +13,7 @@ type
   Font = object
     font: uint32
     fontHDC: int
+    height: int32
 
 var OverlayWindow: GLFWWindow
 
@@ -100,6 +101,7 @@ proc font_init(height: int32, fontName: string): Font {.exportpy.} =
     hOldFont = SelectObject(result.fontHDC, hFont)
 
   result.font = glGenLists(96)
+  result.height = height
   wglUseFontBitmaps(result.fontHDC, 32, 96, result.font.int32)
   SelectObject(result.fontHDC, hOldFont)
   discard DeleteObject(hFont)
