@@ -93,6 +93,8 @@ proc overlay_set_pos(self: Overlay, x, y: int32) {.exportpy.} =
 
 proc font_init(height: int32, fontName: string): Font {.exportpy.} =
   result.fontHDC = wglGetCurrentDC()
+  if result.fontHDC == 0:
+    raise newException(Exception, "Font initialisation without a overlay")
 
   let
     hFont = CreateFont(-(height), 0, 0, 0, FW_DONTCARE, 0, 0, 0, ANSI_CHARSET,
