@@ -202,6 +202,7 @@ proc read_vec2(self: Process, address: ByteAddress): Vec2 {.exportpy.} = self.re
 proc read_vec3(self: Process, address: ByteAddress): Vec3 {.exportpy.} = self.read(address, Vec3)
 proc read_bool(self: Process, address: ByteAddress): bool {.exportpy.} = self.read(address, byte).bool
 
+
 template write_data = self.write(address, data)
 template write_datas = self.writeArray(address, data)
 proc write_int(self: Process, address: ByteAddress, data: int32) {.exportpy.} = write_data
