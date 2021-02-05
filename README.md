@@ -48,7 +48,7 @@ write_vec2(Process, address: int, data: Vec2)
 write_vec3(Process, address: int, data: Vec3)
 write_bool(Process, address: int, data: bool)
 
-dma_addr(Process, baseAddr: int, offsets: array) -> int
+pointer_chain(Process, baseAddr: int, offsets: array) -> int
 aob_scan(Process, pattern: string, module: Process["modules"]["moduleName"] -> int
 nop_code(Process, address: int, length: int)
 patch_bytes(Process, address: int, data: byte array)
