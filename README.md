@@ -11,6 +11,7 @@
 ##### <ins>Memory API</ins>
 ```
 process_by_name(name: string) -> Process
+process_by_pid(pid: int) -> Process
 wait_for_process(name: string) -> Process
 enumerate_processes() -> Process (iterator)
 close(Process) -> bool
