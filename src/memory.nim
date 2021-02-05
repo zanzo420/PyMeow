@@ -109,7 +109,7 @@ proc writeArray[T](self: Process, address: ByteAddress, data: openArray[T]) =
   ) == 0:
     memoryErr("Write", address)
 
-proc dma_addr(self: Process, baseAddr: ByteAddress, offsets: openArray[int]): ByteAddress {.exportpy.} =
+proc pointer_chain(self: Process, baseAddr: ByteAddress, offsets: openArray[int]): ByteAddress {.exportpy.} =
   result = self.read(baseAddr, ByteAddress)
   for o in offsets:
     result = self.read(result + o, ByteAddress)
