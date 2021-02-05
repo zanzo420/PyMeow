@@ -46,6 +46,12 @@ proc pidInfo(pid: int32): Process =
       )
       result.modules[nullTerminated($$me.szModule)] = m
 
+proc process_by_pid(pid: int32): Process {.exportpy.} =
+  result = pidInfo(pid)
+  result.handle = OpenProcess(PROCESS_ALL_ACCESS, 0, pid).int32
+  if result.handle == 0:
+    raise newException(Exception, fmt"Unable to open Process [Pid: {pid}] [Error code: {GetLastError()}]")
+
 proc process_by_name(name: string): Process {.exportpy.} =
   var 
     pidArray = newSeq[int32](1024)
