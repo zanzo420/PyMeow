@@ -71,10 +71,10 @@ proc process_by_name(name: string): Process {.exportpy.} =
 
 iterator enumerate_processes: Process {.exportpy.} =
   var 
-    pidArray = newSeq[int32](1024)
+    pidArray = newSeq[int32](2048)
     read: int32
 
-  assert EnumProcesses(pidArray[0].addr, 1024, read.addr) != FALSE
+  assert EnumProcesses(pidArray[0].addr, 2048, read.addr) != FALSE
 
   for i in 0..<read div 4:
     var p = pidInfo(pidArray[i])
