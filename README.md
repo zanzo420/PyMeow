@@ -69,6 +69,7 @@ overlay_set_pos(Overlay, x, y: int)
 font_init(height: int, fontName: string) -> Font
 font_deinit(Font)
 font_print(Font, x, y: float, text: string, color: rgb array)
+font_print_lines(Font, x, y: float, lines: string array, color: rgb array, offset: float = 2)
 
 box(x, y, width, height, lineWidth: float, color: rgb array)
 alpha_box(x, y, width, height: float, color, outlineColor: rgb array, alpha: float)

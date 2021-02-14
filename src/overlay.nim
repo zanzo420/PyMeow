@@ -119,6 +119,17 @@ proc font_print(self: Font, x, y: float, text: string, color: array[0..2, float3
   glCallLists(cast[int32](text.len), GL_UNSIGNED_BYTE, cast[pointer](text[0].unsafeAddr))
   glPopAttrib()
 
+proc font_print_lines(self: Font, x, y: float, lines: openArray[string], color: array[0..2, float32], offset: float32 = 2) {.exportpy.} =
+  var yPos = y
+  glColor3f(color[0], color[1], color[2])
+  glPushAttrib(GL_LIST_BIT)
+  glListBase(self.font - 32)
+  for t in lines:
+    glWindowPos2f(x, yPos)
+    glCallLists(cast[int32](t.len), GL_UNSIGNED_BYTE, cast[pointer](t[0].unsafeAddr))
+    yPos -= self.height.float32 + offset
+  glPopAttrib()
+
 #[
   2d shapes
 ]#
