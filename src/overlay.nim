@@ -280,4 +280,3 @@ proc custom_shape(points: openArray[Vec2], color: array[0..2, float32], filled: 
   for p in points:
     glVertex2f(p.x, p.y)
   glEnd()
-  
