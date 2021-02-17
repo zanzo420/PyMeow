@@ -1,6 +1,7 @@
 import
   strutils, math, 
-  nimpy, winim, nimgl/[glfw, glfw/native, opengl]
+  nimpy, winim, nimgl/[glfw, glfw/native, opengl],
+  vector
 from strformat import fmt
 
 pyExportModule("pymeow")
@@ -147,6 +148,9 @@ proc box(x, y, width, height, lineWidth: float, color: array[0..2, float32]) {.e
   glVertex2f(x, y + height)
   glEnd()
 
+proc box_v(pos: Vec2, width, height, lineWidth: float, color: array[0..2, float32]) {.exportpy.} =
+  box(pos.x, pos.y, width, height, linewidth, color)
+
 proc alpha_box(x, y, width, height: float, color, outlineColor: array[0..2, float32], alpha: float) {.exportpy.} =
   box(x, y, width, height, 1.0, outlineColor)
   glBegin(GL_POLYGON)
@@ -156,6 +160,9 @@ proc alpha_box(x, y, width, height: float, color, outlineColor: array[0..2, floa
   glVertex2f(x + width, y + height)
   glVertex2f(x, y + height)
   glEnd()
+
+proc alpha_box_v(pos: Vec2, width, height: float, color, outlineColor: array[0..2, float32], alpha: float) {.exportpy.} =
+  alpha_box(pos.x, pos.y, width, height, color, outlineColor, alpha)
 
 proc corner_box(x, y, width, height: float, color, outlineColor: array[0..2, float32], lineWidth: float = 1) {.exportpy.} =
   template drawCorner =
@@ -188,6 +195,8 @@ proc corner_box(x, y, width, height: float, color, outlineColor: array[0..2, flo
   glColor3f(color[0], color[1], color[2])
   drawCorner()
 
+proc corner_box_v(pos: Vec2, width, height: float, color, outlineColor: array[0..2, float32], lineWidth: float = 1) {.exportpy.} =
+  corner_box(pos.x, pos.y, width, height, color, outlineColor, lineWidth)
 
 proc line(x1, y1, x2, y2, lineWidth: float, color: array[0..2, float32]) {.exportpy.} =
   glLineWidth(lineWidth)
@@ -196,6 +205,9 @@ proc line(x1, y1, x2, y2, lineWidth: float, color: array[0..2, float32]) {.expor
   glVertex2f(x1, y1)
   glVertex2f(x2, y2)
   glEnd()
+
+proc line_v(pos1, pos2: Vec2, lineWidth: float, color: array[0..2, float32]) {.exportpy.} =
+  line(pos1.x, pos1.y, pos2.x, pos2.y, lineWidth, color)
 
 proc dashed_line(x1, y1, x2, y2, lineWidth: float, color: array[0..2, float32], factor: int32 = 2, pattern: string = "11111110000", alpha: float32 = 0.5) {.exportpy.} =
   glPushAttrib(GL_ENABLE_BIT)
@@ -210,6 +222,9 @@ proc dashed_line(x1, y1, x2, y2, lineWidth: float, color: array[0..2, float32], 
   glEnd()
   glPopAttrib()
 
+proc dashed_line_v(pos1, pos2: Vec2, lineWidth: float, color: array[0..2, float32], factor: int32 = 2, pattern: string = "11111110000", alpha: float32 = 0.5) {.exportpy.} =
+  dashed_line(pos1.x, pos1.y, pos2.x, pos2.y, lineWidth, color, factor, pattern, alpha)
+
 proc circle(x, y, radius: float, color: array[0..2, float32], filled: bool = true) {.exportpy.} =
   if filled: glBegin(GL_POLYGON)
   else: glBegin(GL_LINE_LOOP)
@@ -222,6 +237,9 @@ proc circle(x, y, radius: float, color: array[0..2, float32], filled: bool = tru
     )
   glEnd()
 
+proc circle_v(pos: Vec2, radius: float, color: array[0..2, float32], filled: bool = true) {.exportpy.} =
+  circle(pos.x, pos.y, radius, color, filled)
+
 proc rad_circle(x, y, radius: float, value: int, color: array[0..2, float32]) {.exportpy.} =
   glBegin(GL_POLYGON)
   glColor3f(color[0], color[1], color[2])
@@ -232,13 +250,8 @@ proc rad_circle(x, y, radius: float, value: int, color: array[0..2, float32]) {.
     )
   glEnd()
 
-proc triangle(x1, y1, x2, y2, x3, y3: float, color: array[0..2, float32], alpha: float) {.exportpy.} =
-  glBegin(GL_POLYGON)
-  glColor4f(color[0], color[1], color[2], alpha)
-  glVertex2f(x1, y1)
-  glVertex2f(x2, y2)
-  glVertex2f(x3, y3)
-  glEnd()
+proc rad_circle_v(pos: Vec2, radius: float, value: int, color: array[0..2, float32]) {.exportpy.} =
+  rad_circle(pos.x, pos.y, radius, value, color)
 
 proc value_bar(x1, y1, x2, y2, width, maxValue, value: float, vertical: bool = true) {.exportpy.} =
   if value > maxValue:
@@ -256,3 +269,15 @@ proc value_bar(x1, y1, x2, y2, width, maxValue, value: float, vertical: bool = t
     line(x1, y1, x2, barY, width, color)
   else:
     line(x1, y1, barX, y2, width, color)
+
+proc value_bar_v(pos1, pos2: Vec2, width, maxValue, value: float, vertical: bool = true) {.exportpy.} =
+  value_bar(pos1.x, pos1.y, pos2.x, pos2.y, width, maxValue, value, vertical)
+
+proc custom_shape(points: openArray[Vec2], color: array[0..2, float32], filled: bool = true, alpha: float = 1.0) {.exportpy.} =
+  if filled: glBegin(GL_POLYGON)
+  else: glBegin(GL_LINE_LOOP)
+  glColor4f(color[0], color[1], color[2], alpha)
+  for p in points:
+    glVertex2f(p.x, p.y)
+  glEnd()
+  

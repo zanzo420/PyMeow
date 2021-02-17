@@ -3,7 +3,6 @@ import pymeow as pm
 from math import fmod
 from time import time
 
-
 def main():
     overlay = pm.overlay_init()
     font = pm.font_init(20, "Impact")
@@ -17,9 +16,19 @@ def main():
     prev_time = time()
     curr_time = None
 
+    star_offset = 100
+    star_x = overlay["midX"] - 70
+    star_y = overlay["midY"]
+    star_points = [
+        pm.vec2(star_x, star_y + star_offset),
+        pm.vec2(star_x + star_offset, star_y),
+        pm.vec2(star_x, star_y - star_offset),
+        pm.vec2(star_x - star_offset, star_y),
+    ]
+
     while pm.overlay_loop(overlay):
         pm.overlay_update(overlay)
-        
+        pm.custom_shape(star_points, pm.rgb("yellow"))
         curr_time = time()
         frames += 1
 
@@ -60,7 +69,6 @@ def main():
         r = fmod(r + 0.001, 1)
         g = fmod(g + 0.002, 1)
         b = fmod(b + 0.003, 1)
-
         pm.circle(
             x=x,
             y=y,

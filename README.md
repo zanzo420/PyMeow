@@ -8,7 +8,8 @@
 
 ### ![Examples](https://github.com/Sann0/PyMeow#assault-cube-esp)
 
-##### <ins>Memory API</ins>
+## <ins>Cheatsheet:</ins>
+##### <ins>Memory</ins>
 ```
 process_by_name(name: string) -> Process
 process_by_pid(pid: int) -> Process
@@ -56,7 +57,7 @@ patch_bytes(Process, address: int, data: byte array)
 inject_dll(Process, dllPath: string)
 page_protection(Process, address: int, newProtection: int = 0x40) -> int (old protection)
 ```
-##### <ins>Overlay API</ins>
+##### <ins>Overlay</ins>
 ```
 overlay_init(target: string = "Fullscreen", exitKey: int = 0x23 (END), borderOffset: int = 25) -> Overlay
 overlay_close(Overlay)
@@ -64,7 +65,7 @@ overlay_deinit()
 overlay_loop(Overlay) -> bool
 overlay_set_pos(Overlay, x, y: int)
 ```
-##### <ins>Drawing API</ins>
+##### <ins>Drawing</ins>
 ```
 font_init(height: int, fontName: string) -> Font
 font_deinit(Font)
@@ -72,16 +73,24 @@ font_print(Font, x, y: float, text: string, color: rgb array)
 font_print_lines(Font, x, y: float, lines: string array, color: rgb array, offset: float = 2)
 
 box(x, y, width, height, lineWidth: float, color: rgb array)
+box_v(pos: Vec2, width, height, lineWidth: float, color: rgb array)
 alpha_box(x, y, width, height: float, color, outlineColor: rgb array, alpha: float)
-line(x1, y1, x2, y2, lineWidth: float, color: rgb array)
-dashed_line(x1, y1, x2, y2, lineWidth: float, color: rgb array, factor: int = 2, pattern: string = "11111110000", alpha: float = 0.5)
-circle(x, y, radius: float, color: rgb array, filled: bool = true)
-rad_circle(x, y, radius: float, value: int, color: rgb array)
-triangle(x1, y1, x2, y2, x3, y3: float, color: rgb array, alpha: float)
-value_bar(x1, y1, x2, y2, width, maxValue, value: float, vertical: bool = true)
+alpha_box_v(pos: Vec2, width, height: float, color: rgb array, outlineColor: rgb array, alpha: float)
 corner_box(x, y, width, height: float, color, outlineColor: rgb array, lineWidth: float = 1)
+corner_box_v(pos: Vec2, width, height: float, color, outlineColor: rgb array, lineWidth: float = 1)
+line(x1, y1, x2, y2, lineWidth: float, color: rgb array)
+line_v(pos1, pos2: Vec2, lineWidth: float, color: rgb array)
+dashed_line(x1, y1, x2, y2, lineWidth: float, color: rgb array, factor: int = 2, pattern: string = "11111110000", alpha: float = 0.5)
+dashed_line_v(pos1, pos2: Vec2, lineWidth: float, color: rgb array, factor: int = 2, pattern: string = "11111110000", alpha: float = 0.5)
+circle(x, y, radius: float, color: rgb array, filled: bool = true)
+circle_v(pos: Vec2, radius: float, color: rgb array, filled: bool = true)
+rad_circle(x, y, radius: float, value: int, color: rgb array)
+rad_circle_v(pos: Vec2, radius: float, value: int, color: rgb array)
+value_bar(x1, y1, x2, y2, width, maxValue, value: float, vertical: bool = true)
+value_bar_v(pos1, pos2: Vec2, width, maxValue, value: float, vertical: bool = true)
+custom_shape(points: Vec2 array, color: rgb array, filled: bool = true, alpha: float = 1.0)
 ```
-##### <ins>Vector API</ins>
+##### <ins>Vector</ins>
 ```
 vec2(x, y: float = 0) -> Vec2
 vec2_add(a, b: Vec2) -> Vec2
