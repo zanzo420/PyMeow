@@ -42,8 +42,6 @@ def main():
             sleep(0.01)
             overlay_update(overlay)
 
-            if key_pressed(35):
-                overlay_close(overlay)
 
 if __name__ == '__main__':
     main()

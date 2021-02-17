@@ -82,8 +82,6 @@ def main():
 
     while overlay_loop(overlay):
         overlay_update(overlay)
-        if key_pressed(35):
-            overlay_close(overlay)
 
         try:
             local_player_addr = read_int(csgo_proc, game_module + Offsets.dwLocalPlayer)

@@ -58,7 +58,7 @@ page_protection(Process, address: int, newProtection: int = 0x40) -> int (old pr
 ```
 ##### <ins>Overlay API</ins>
 ```
-overlay_init(target: string = "Fullscreen", borderOffset: int = 25) -> Overlay
+overlay_init(target: string = "Fullscreen", exitKey: int = 0x23 (END), borderOffset: int = 25) -> Overlay
 overlay_close(Overlay)
 overlay_deinit()
 overlay_loop(Overlay) -> bool

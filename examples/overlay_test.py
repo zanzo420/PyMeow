@@ -19,8 +19,6 @@ def main():
 
     while pm.overlay_loop(overlay):
         pm.overlay_update(overlay)
-        if pm.key_pressed(35):
-            pm.overlay_close(overlay)
         
         curr_time = time()
         frames += 1

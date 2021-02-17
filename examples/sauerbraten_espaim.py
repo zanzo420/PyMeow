@@ -93,11 +93,8 @@ def main():
 
     while overlay_loop(overlay):
         overlay_update(overlay)
-        if key_pressed(35):
-            overlay_close(overlay)
 
         ent_vecs = list()
-
         for e in get_ents():
             ent_vecs.append(e.hpos3d)
             head = e.fpos2d["y"] - e.hpos2d["y"]

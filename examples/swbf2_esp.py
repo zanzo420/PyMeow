@@ -139,8 +139,6 @@ def main():
                 )
 
         overlay_update(overlay)
-        if key_pressed(35):
-            overlay_close(overlay)
 
     overlay_deinit(overlay)
 

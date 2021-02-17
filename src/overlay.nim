@@ -9,6 +9,7 @@ type
   Overlay* = object
     width*, height*, midX*, midY*: float
     hwnd: int
+    exitKey: int32
 
   Font = object
     font: uint32
@@ -21,7 +22,7 @@ var OverlayWindow: GLFWWindow
   overlay
 ]#
 
-proc overlay_init(target: string = "Fullscreen", borderOffset: int32 = 25): Overlay {.exportpy.} =
+proc overlay_init(target: string = "Fullscreen", exitKey: int32 = 0x23, borderOffset: int32 = 25): Overlay {.exportpy.} =
   var rect: RECT
   assert glfwInit()
 
@@ -31,6 +32,7 @@ proc overlay_init(target: string = "Fullscreen", borderOffset: int32 = 25): Over
   glfwWindowHint(GLFWTransparentFramebuffer, GLFWTrue)
   glfwWindowHint(GLFWSamples, 8)
 
+  result.exitKey = exitKey
   if target == "Fullscreen":
     let videoMode = getVideoMode(glfwGetPrimaryMonitor())
     result.width = videoMode.width.float32
@@ -41,7 +43,6 @@ proc overlay_init(target: string = "Fullscreen", borderOffset: int32 = 25): Over
     let hwndWin = FindWindowA(nil, target)
     if hwndWin == 0:
       raise newException(Exception, fmt"Window ({target}) not found")
-
     GetWindowRect(hwndWin, rect.addr)
     result.width = rect.right.float32 - rect.left.float32
     result.height = rect.bottom.float32 - rect.top.float32 - borderOffset.float32
@@ -81,7 +82,9 @@ proc overlay_deinit(self: Overlay) {.exportpy.} =
 proc overlay_close(self: Overlay) {.exportpy.} = 
   OverlayWindow.setWindowShouldClose(true)
 
-proc overlay_loop(self: Overlay): bool {.exportpy.} = 
+proc overlay_loop(self: Overlay): bool {.exportpy.} =
+  if GetAsyncKeyState(self.exitKey).bool:
+    self.overlay_close()
   not OverlayWindow.windowShouldClose()
 
 proc overlay_set_pos(self: Overlay, x, y: int32) {.exportpy.} =
