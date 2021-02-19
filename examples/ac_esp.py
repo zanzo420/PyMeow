@@ -32,7 +32,6 @@ class Entity:
             "armor": read_int(self.mem, self.addr + Offsets.armor),
             "pos3d": read_vec3(self.mem, self.addr + Offsets.pos),
             "pos2d": vec2(),
-            
         }
 
 
