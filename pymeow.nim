@@ -1,7 +1,7 @@
 #[
   PyMeow - Python Game Hacking Library
   Meow @ 2020
-  1.28
+  1.29
 ]#
 
 import src/[
