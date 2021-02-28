@@ -18,6 +18,7 @@ type
     baseaddr: ByteAddress
     basesize: int
     modules: Table[string, Module]
+    debug: bool
 
 proc pidInfo(pid: int32): Process =
   var 
@@ -103,11 +104,18 @@ proc read(self: Process, address: ByteAddress, t: typedesc): t =
   ) == 0:
     memoryErr("Read", address)
 
+  if self.debug:
+    echo fmt"[R] [{$type(result)}] 0x{address.toHex()} -> {result}"
+
+
 proc write(self: Process, address: ByteAddress, data: any) =
   if WriteProcessMemory(
     self.handle, cast[pointer](address), data.unsafeAddr, sizeof(data), nil
   ) == 0:
     memoryErr("Write", address)
+  
+  if self.debug:
+    echo fmt"[W] [{$type(data)}] 0x{address.toHex()} -> {data}"
 
 proc writeArray[T](self: Process, address: ByteAddress, data: openArray[T]) =
   if WriteProcessMemory(
