@@ -40,7 +40,6 @@ def main():
             )
 
             sleep(0.01)
-            overlay_update(overlay)
 
 
 if __name__ == '__main__':

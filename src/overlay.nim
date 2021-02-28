@@ -86,6 +86,7 @@ proc overlay_close(self: Overlay) {.exportpy.} =
 proc overlay_loop(self: Overlay): bool {.exportpy.} =
   if GetAsyncKeyState(self.exitKey).bool:
     self.overlay_close()
+  self.overlay_update()
   not OverlayWindow.windowShouldClose()
 
 proc overlay_set_pos(self: Overlay, x, y: int32) {.exportpy.} =

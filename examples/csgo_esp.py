@@ -81,8 +81,6 @@ def main():
     set_foreground("Counter-Strike: Global Offensive")
 
     while overlay_loop(overlay):
-        overlay_update(overlay)
-
         try:
             local_player_addr = read_int(csgo_proc, game_module + Offsets.dwLocalPlayer)
             local_ent = Entity(local_player_addr, csgo_proc, game_module)

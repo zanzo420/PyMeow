@@ -138,7 +138,6 @@ def main():
                     0.15,
                 )
 
-        overlay_update(overlay)
 
     overlay_deinit(overlay)
 

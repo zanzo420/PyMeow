@@ -92,8 +92,6 @@ def main():
     font = font_init(10, "Tahoma")
 
     while overlay_loop(overlay):
-        overlay_update(overlay)
-
         ent_vecs = list()
         for e in get_ents():
             ent_vecs.append(e.hpos3d)

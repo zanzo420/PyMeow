@@ -27,7 +27,6 @@ def main():
     ]
 
     while pm.overlay_loop(overlay):
-        pm.overlay_update(overlay)
         pm.custom_shape(star_points, pm.rgb("yellow"))
         curr_time = time()
         frames += 1
